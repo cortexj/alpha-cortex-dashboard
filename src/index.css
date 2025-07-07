@@ -31,9 +31,13 @@ body {
   margin: 0;
   min-height: 100vh;
   overflow-x: hidden;
-  background: linear-gradient(135deg, #1e1b4b 0%, #581c87 25%, #be185d 50%, #7c2d12 75%, #1e1b4b 100%);
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #fdf4ff 50%, #f0fdf4 75%, #f0f9ff 100%);
   background-size: 400% 400%;
   animation: gradientFlow 15s ease infinite;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 @keyframes gradientFlow {
@@ -87,6 +91,28 @@ body {
     transform: scale(0);
     animation: ripple 0.6s linear;
     pointer-events: none;
+  }
+  
+  /* Fix dropdown animation performance */
+  .dropdown-content {
+    transform: translateZ(0);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+  }
+  
+  /* Enhanced button interactions */
+  .enhanced-button {
+    transform: translateZ(0);
+    will-change: transform;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .enhanced-button:hover {
+    transform: translateY(-1px) scale(1.02);
+  }
+  
+  .enhanced-button:active {
+    transform: translateY(0) scale(0.98);
   }
 }
 

@@ -6,7 +6,7 @@ import TaskManager from './components/TaskManager';
 import PomodoroTimer from './components/PomodoroTimer';
 import AchievementPanel from './components/AchievementPanel';
 import Footer from './components/Footer';
-import useProductivityStore from './store/useProductivityStore';
+import useProductivityStore from './store/useProductivityStore.js';
 
 function App() {
   const {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import AnimateOnScroll from './components/AnimateOnScroll';
 import Header from './components/Header';
 import MetricsDashboard from './components/MetricsDashboard';
 import PhaseComparisonCharts from './components/PhaseComparisonCharts';
@@ -278,47 +279,69 @@ function App() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 p-4">
-      <Header 
-        isTimerRunning={isTimerRunning}
-        setIsTimerRunning={setIsTimerRunning}
-        sessionTime={sessionTime}
-      />
-      
-      <MetricsDashboard 
-        calculateMetrics={calculateMetrics}
-        credits={credits}
-        achievements={achievements}
-      />
-      
-      <PhaseComparisonCharts 
-        calculateMetrics={calculateMetrics}
-        phaseRadarData={phaseRadarData}
-      />
-      
-      <AIInsightsPanel 
-        aiInsights={aiInsights}
-        getAIInsights={getAIInsights}
-      />
-      
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <PhaseTabs 
-          activePhase={activePhase}
-          setActivePhase={setActivePhase}
-          calculateMetrics={calculateMetrics}
-        />
-        
-        <StepList 
-          activePhase={activePhase}
-          steps={steps}
-          expandedSteps={expandedSteps}
-          toggleStepExpansion={toggleStepExpansion}
-          updateStepStatus={updateStepStatus}
-          calculateMetrics={calculateMetrics}
-        />
+    <div className="min-h-screen p-4 relative overflow-hidden">
+      {/* Background pattern overlay */}
+      <div className="fixed inset-0 opacity-5 pointer-events-none">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,_rgba(14,165,233,0.3)_1px,_transparent_0)] bg-[20px_20px]"></div>
       </div>
       
-      <Footer calculateMetrics={calculateMetrics} />
+      <AnimateOnScroll animation="animate-fade-in-down" delay={100}>
+        <Header 
+          isTimerRunning={isTimerRunning}
+          setIsTimerRunning={setIsTimerRunning}
+          sessionTime={sessionTime}
+        />
+      </AnimateOnScroll>
+      
+      <AnimateOnScroll animation="animate-fade-in-up" delay={200}>
+        <MetricsDashboard 
+          calculateMetrics={calculateMetrics}
+          credits={credits}
+          achievements={achievements}
+        />
+      </AnimateOnScroll>
+      
+      <AnimateOnScroll animation="animate-slide-in-right" delay={300}>
+        <PhaseComparisonCharts 
+          calculateMetrics={calculateMetrics}
+          phaseRadarData={phaseRadarData}
+        />
+      </AnimateOnScroll>
+      
+      <AnimateOnScroll animation="animate-fade-in-up" delay={400}>
+        <AIInsightsPanel 
+          aiInsights={aiInsights}
+          getAIInsights={getAIInsights}
+        />
+      </AnimateOnScroll>
+      
+      <AnimateOnScroll animation="animate-fade-in-up" delay={500}>
+        <div className="glass-effect rounded-xl p-6 relative overflow-hidden">
+          {/* Subtle glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-500/5 via-accent-500/5 to-success-500/5 opacity-50"></div>
+          
+          <div className="relative z-10">
+            <PhaseTabs 
+              activePhase={activePhase}
+              setActivePhase={setActivePhase}
+              calculateMetrics={calculateMetrics}
+            />
+            
+            <StepList 
+              activePhase={activePhase}
+              steps={steps}
+              expandedSteps={expandedSteps}
+              toggleStepExpansion={toggleStepExpansion}
+              updateStepStatus={updateStepStatus}
+              calculateMetrics={calculateMetrics}
+            />
+          </div>
+        </div>
+      </AnimateOnScroll>
+      
+      <AnimateOnScroll animation="animate-fade-in-up" delay={600}>
+        <Footer calculateMetrics={calculateMetrics} />
+      </AnimateOnScroll>
     </div>
   );
 }

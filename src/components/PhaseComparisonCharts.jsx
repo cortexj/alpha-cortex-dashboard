@@ -8,12 +8,13 @@ import { Target, Cpu } from 'lucide-react';
 const PhaseComparisonCharts = ({ calculateMetrics, phaseRadarData }) => {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Target className="w-5 h-5" />
+      <div className="glass-effect rounded-xl p-6 group hover:shadow-2xl transition-all duration-500">
+        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
+          <Target className="w-5 h-5 text-primary-600 group-hover:animate-pulse" />
           Phase Progress Comparison
         </h3>
-        <ResponsiveContainer width="100%" height={300}>
+        <div className="relative overflow-hidden rounded-lg">
+          <ResponsiveContainer width="100%" height={300}>
           <BarChart data={[
             { phase: 'Phase 0: Foundation', progress: calculateMetrics.phase0Progress, total: 60 },
             { phase: 'Phase 1: Implementation', progress: calculateMetrics.phase1Progress, total: 45 }
@@ -26,14 +27,16 @@ const PhaseComparisonCharts = ({ calculateMetrics, phaseRadarData }) => {
             <Bar dataKey="total" fill="#E5E7EB" name="Total Steps" />
           </BarChart>
         </ResponsiveContainer>
+        </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow p-6">
-        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
-          <Cpu className="w-5 h-5" />
+      <div className="glass-effect rounded-xl p-6 group hover:shadow-2xl transition-all duration-500">
+        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-gray-800">
+          <Cpu className="w-5 h-5 text-accent-600 group-hover:animate-pulse" />
           Phase Complexity Analysis
         </h3>
-        <ResponsiveContainer width="100%" height={300}>
+        <div className="relative overflow-hidden rounded-lg">
+          <ResponsiveContainer width="100%" height={300}>
           <RadarChart data={phaseRadarData}>
             <PolarGrid />
             <PolarAngleAxis dataKey="metric" />
@@ -43,6 +46,7 @@ const PhaseComparisonCharts = ({ calculateMetrics, phaseRadarData }) => {
             <Legend />
           </RadarChart>
         </ResponsiveContainer>
+        </div>
       </div>
     </div>
   );

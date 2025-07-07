@@ -22,6 +22,7 @@ const Header = ({ isTimerRunning, setIsTimerRunning, sessionTime }) => {
           </div>
           <div className="flex items-center gap-4">
             <button
+              onClick={() => setIsTimerRunning(!isTimerRunning)}
               className={`button-micro flex items-center gap-2 px-6 py-3 rounded-xl font-medium shadow-lg transition-all duration-300 focus-enhanced ${
                 isTimerRunning 
                   ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white hover:shadow-red-500/30' 
@@ -29,11 +30,10 @@ const Header = ({ isTimerRunning, setIsTimerRunning, sessionTime }) => {
               }`}
             >
               {isTimerRunning ? (
-                <Pause className="w-5 h-5 animate-pulse" />
+                <Pause className="w-5 h-5" />
               ) : (
-                <Play className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
+                <Play className="w-5 h-5" />
               )}
-              {isTimerRunning ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
               {isTimerRunning ? 'Pause' : 'Start'} Session
             </button>
             <div className="text-center glass-effect rounded-lg p-3 min-w-[120px]">
@@ -42,7 +42,6 @@ const Header = ({ isTimerRunning, setIsTimerRunning, sessionTime }) => {
                 {Math.floor(animatedMinutes).toString().padStart(2, '0')}:
                 {Math.floor(animatedSeconds).toString().padStart(2, '0')}
               </div>
-              <p className="text-gray-600 mt-1 animate-fade-in-up">Zero-Drift Protocol Execution Dashboard</p>
             </div>
           </div>
         </div>

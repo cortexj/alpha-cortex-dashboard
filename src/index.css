@@ -85,11 +85,11 @@ body {
   }
   
   .metric-card {
-    @apply bg-white/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 p-6 transition-all duration-300 hover:bg-white/90 hover:shadow-xl hover:-translate-y-1;
+    @apply bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-white/30 p-6 transition-all duration-300 hover:bg-white/95 hover:shadow-xl hover:-translate-y-1 relative;
   }
   
   .glass-effect {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/80 backdrop-blur-md border border-white/30 shadow-xl;
   }
   
   .animate-in {
@@ -181,4 +181,27 @@ body {
 /* Achievement badges */
 .achievement-badge {
   @apply inline-flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 text-white font-bold text-sm shadow-lg animate-bounce-gentle;
+}
+
+/* Enhanced button styles */
+.btn-primary {
+  @apply bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white shadow-lg hover:shadow-primary-500/30;
+}
+
+.btn-success {
+  @apply bg-gradient-to-r from-success-500 to-success-600 hover:from-success-600 hover:to-success-700 text-white shadow-lg hover:shadow-success-500/30;
+}
+
+.btn-accent {
+  @apply bg-gradient-to-r from-accent-500 to-accent-600 hover:from-accent-600 hover:to-accent-700 text-white shadow-lg hover:shadow-accent-500/30;
+}
+
+/* Improved card styles */
+.step-card {
+  @apply bg-white/90 backdrop-blur-sm border-2 rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1;
+}
+
+/* Better glass morphism */
+.glass-panel {
+  @apply bg-white/20 backdrop-blur-xl border border-white/30 shadow-2xl;
 }

@@ -23,13 +23,16 @@ const StepCard = ({ step, expandedSteps, toggleStepExpansion, updateStepStatus }
     pending: <Circle className="w-5 h-5 text-gray-400" />
   };
 
-  const handleToggleExpansion = () => {
+  const handleToggleExpansion = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     setIsAnimating(true);
     toggleStepExpansion(step.id);
     setTimeout(() => setIsAnimating(false), 300);
   };
 
   const handleStatusUpdate = (e) => {
+    e.preventDefault();
     e.stopPropagation();
     setIsAnimating(true);
     updateStepStatus(step.id, step.status === 'pending' ? 'in-progress' : 'completed');
@@ -37,16 +40,16 @@ const StepCard = ({ step, expandedSteps, toggleStepExpansion, updateStepStatus }
   };
 
   return (
-    <div className={`border-2 rounded-xl p-4 mb-3 transition-all duration-300 cursor-pointer group relative overflow-hidden ${statusColors[step.status]} hover:shadow-xl hover:-translate-y-1 ${isAnimating ? 'animate-pulse' : ''}`}>
+    <div className={`border-2 rounded-xl p-4 mb-3 transition-all duration-300 group relative overflow-hidden ${statusColors[step.status]} hover:shadow-xl hover:-translate-y-1 ${isAnimating ? 'animate-pulse' : ''}`}>
       {/* Subtle gradient overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/20 via-transparent to-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-out"></div>
       
-      <div onClick={handleToggleExpansion} className="relative z-10">
+      <div className="relative z-10">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-1 cursor-pointer" onClick={handleToggleExpansion}>
             {statusIcons[step.status]}
             <span className="font-medium text-gray-800 group-hover:text-gray-900">Step {step.id}: {step.title}</span>
-            <div className="transition-transform duration-200">
+            <div className="transition-transform duration-200 ml-2">
               {isExpanded ? (
                 <ChevronDown className="w-4 h-4 text-gray-500 rotate-0 transition-transform duration-200" />
               ) : (
@@ -78,7 +81,7 @@ const StepCard = ({ step, expandedSteps, toggleStepExpansion, updateStepStatus }
           isExpanded ? 'max-h-96 opacity-100 mt-3' : 'max-h-0 opacity-0'
         }`}>
           <div className="pl-8 text-sm text-gray-700 animate-fade-in-up">
-            <p>{step.description}</p>
+            <p className="mb-2">{step.description}</p>
             <div className="mt-3 flex gap-4 items-center">
               <span className="text-xs text-gray-500 glass-effect px-2 py-1 rounded-md">
                 Sub-phase: {step.subPhase}

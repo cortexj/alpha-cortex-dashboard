@@ -84,7 +84,7 @@ export const useHighPrecisionTimer = () => {
     if (timer.isRunning && timer.startTime) {
       const now = performance.now();
       const elapsed = now - timer.startTime;
-      const currentTime = Math.floor(elapsed / 1000);
+      const currentTime = Math.floor(elapsed / 1000) + Math.floor(timer.pausedTime / 1000);
       
       // Only update if time has actually changed (avoid unnecessary renders)
       if (currentTime !== lastUpdateRef.current) {
@@ -98,13 +98,14 @@ export const useHighPrecisionTimer = () => {
   
   // Start timer function
   const handleStartTimer = useCallback(() => {
+    const now = performance.now();
     startTimer();
     initializeWorker();
     
     if (workerRef.current) {
       workerRef.current.postMessage({
         action: 'start',
-        timestamp: performance.now() - timer.pausedTime
+        timestamp: now - timer.pausedTime
       });
     }
     

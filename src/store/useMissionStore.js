@@ -50,7 +50,8 @@ const useMissionStore = create(
         timer: {
           ...state.timer,
           isRunning: true,
-          startTime: now - state.timer.pausedTime,
+          startTime: now,
+          lastUpdate: now,
         }
       }));
     },
@@ -61,7 +62,7 @@ const useMissionStore = create(
         timer: {
           ...state.timer,
           isRunning: false,
-          pausedTime: now - (state.timer.startTime || now),
+          pausedTime: state.timer.pausedTime + (now - (state.timer.startTime || now)),
         }
       }));
     },

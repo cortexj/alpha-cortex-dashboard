@@ -62,7 +62,11 @@ const EnhancedStepCard = ({ step }) => {
     e.stopPropagation();
     setIsAnimating(true);
     toggleStepExpansion(step.id);
-    setTimeout(() => setIsAnimating(false), 300);
+    
+    // Use requestAnimationFrame for better performance
+    requestAnimationFrame(() => {
+      setTimeout(() => setIsAnimating(false), 300);
+    });
   };
   
   const handleStatusUpdate = (e, newStatus) => {
